@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Coin Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+        .coin-container {
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .score, .upgrade {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #555;
+        }
+        .upgrade {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click Coin Game</h1>
+    <div class="coin-container">
+        <button id="coinButton">💰 Collect Coins</button>
+        <p class="score">Coins: <span id="coins">0</span></p>
+        <p class="score">Per Click: <span id="perClick">1</span></p>
+    </div>
+    <div class="upgrade">
+        <button id="upgradeButton">Upgrade (Cost: 10 Coins)</button>
+    </div>
+
+    <script>
+        // Variables
+        let coins = 0;
+        let perClick = 1;
+        let upgradeCost = 10;
+
+        // Get DOM elements
+        const coinButton = document.getElementById('coinButton');
+        const coinsDisplay = document.getElementById('coins');
+        const perClickDisplay = document.getElementById('perClick');
+        const upgradeButton = document.getElementById('upgradeButton');
+
+        // Collect Coins
+        coinButton.addEventListener('click', () => {
+            coins += perClick;
+            coinsDisplay.textContent = coins;
+        });
+
+        // Upgrade Per Click
+        upgradeButton.addEventListener('click', () => {
+            if (coins >= upgradeCost) {
+                coins -= upgradeCost;
+                perClick++;
+                upgradeCost = Math.floor(upgradeCost * 1.5); // Increase cost
+                coinsDisplay.textContent = coins;
+                perClickDisplay.textContent = perClick;
+                upgradeButton.textContent = `Upgrade (Cost: ${upgradeCost} Coins)`;
+            } else {
+                alert("Not enough coins!");
+            }
+        });
+    </script>
+</body>
+</html>
